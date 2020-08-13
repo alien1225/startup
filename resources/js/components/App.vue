@@ -21,6 +21,7 @@ export default {
 
         return config;
       });
+      window.authUser = this.user;
       console.log("App mounted. User: "+this.user.name);
     }else {
         console.log("App mounted. User: anonimus");

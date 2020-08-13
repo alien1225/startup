@@ -12,6 +12,8 @@ class User extends Authenticatable
 
     protected $guarded = [];
 
+
+
     public function userParties() {
         return $this->hasMany(\App\Party::class);
     }
