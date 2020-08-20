@@ -15,4 +15,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::post('/parties/create', 'PartyController@create');
+Route::get('/party/{partyId}', 'PartyController@party');
+Route::get('/parties', 'PartyController@index');
+
 Route::post('/parties/use/leave', 'PartyChannelController@leaveChannel');
+Route::post('/parties/use/message', 'PartyChannelController@sendMessageChat');
+
+
+/* TEST */
+Route::post('/parties/test/update', 'TestPartyUpdateEventController@update');
+Route::post('/parties/test/delete', 'TestPartyUpdateEventController@delete');

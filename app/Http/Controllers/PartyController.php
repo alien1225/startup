@@ -4,12 +4,19 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\User;
+use App\Party;
+use App\Http\Resources\PartyResource;
 
 class PartyController extends Controller
 {
     public function __construct()
     {
         $this->middleware('auth:api');
+    }
+
+    public function index() {
+        return PartyResource::collection(Party::where('visible', '=', 1)->get());
     }
 
     public function create(Request $request) {
@@ -27,4 +34,11 @@ class PartyController extends Controller
         ]);
     }
 
+    public function party(Party $partyId) {
+        if (Auth::user()->userParty && Auth::user()->userParty->id == $partyId->id) {
+            return response($partyId, 200);
+        }
+    }
 }
+
+

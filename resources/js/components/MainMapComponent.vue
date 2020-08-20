@@ -73,7 +73,6 @@ export default {
       		});
       		this.map.panTo(latLng);
           this.$emit('updateCoords', latLng);
-      		console.log("Set Party Marker");
     	},
     	mapInit: function() {
     		this.map = new google.maps.Map(document.getElementById("map"), {
@@ -97,7 +96,6 @@ export default {
             			lat: position.coords.latitude,
             			lng: position.coords.longitude,
           			};
-          			console.log(pos);
           			this.userMarker.setPosition(pos);
           			this.map.panTo(pos);
 

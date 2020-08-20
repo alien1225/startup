@@ -5,11 +5,9 @@ namespace App\Observers;
 use App\Party;
 use App\Events\PartyMap;
 
-class PartyObserver
+class PartyObserver extends Observer
 {
-    private $st_created = 1;
-    private $st_updated = 2;
-    private $st_deleted = 0;
+   
     /**
      * Handle the party "created" event.
      *

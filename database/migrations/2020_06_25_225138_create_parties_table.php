@@ -18,6 +18,7 @@ class CreatePartiesTable extends Migration
             $table->string('name');
             $table->text('description');
             $table->integer('visible')->default(1);
+            $table->integer('password')->default(0);
             $table->unsignedBigInteger('user_id')->default(0);
             $table->integer('max_users');
             $table->string('coords')->nullable();

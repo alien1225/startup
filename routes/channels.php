@@ -4,29 +4,26 @@ use Illuminate\Support\Facades\Broadcast;
 use App\User;
 use App\Party;
 use Illuminate\Support\Facades\Auth;
-/*
-|--------------------------------------------------------------------------
-| Broadcast Channels
-|--------------------------------------------------------------------------
-|
-| Here you may register all of the event broadcasting channels that your
-| application supports. The given channel authorization callbacks are
-| used to check if an authenticated user can listen to the channel.
-|
-*/
+use App\Notifications\PartyNotification;
+
 
 Broadcast::channel('map', function(User $user) {
-	return Party::where('visible', '=', 1)->get();
+	return Auth::check() ? true : false;
 });
 
-Broadcast::channel('party.{partyId}', function(User $user, $partyId) {
-
-	if ($user->userParty && $user->userParty->id === (int)$partyId) {
-		return $user;
+Broadcast::channel('party.{partyId}', function(User $user, $partyId) {	
+	if ($user->userParty) {
+		if ($user->userParty->id === (int)$partyId) {
+			return $user;
+		}
+		$user->notify(new PartyNotification($user->userParty, 'event', 'Leave party - '.$user->userParty->name));
+		return false;
 	}
-
 	$user->party_id = $partyId;
 	$user->save();
 	return $user;
+});
 
+Broadcast::channel('App.User.{userId}', function (User $user, $userId) {
+    return (int) $user->id === (int) $userId;
 });

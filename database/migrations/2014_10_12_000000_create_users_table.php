@@ -18,7 +18,7 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('api_token');
-            $table->unsignedBigInteger('party_id')->nullable();
+            $table->unsignedBigInteger('party_id')->default(0);
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

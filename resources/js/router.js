@@ -1,5 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
+
+/* ---------   ROUTE COMPONENTS   ---------*/
 import MainMap from "./views/main-map";
 
 Vue.use(VueRouter);
